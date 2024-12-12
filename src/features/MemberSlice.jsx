@@ -26,7 +26,7 @@ export const getProfileMember = createAsyncThunk(
 const MemberSlice = createSlice({
     name: 'member',
     initialState: {
-        user:null, 
+        user:[], 
         loading: false,
         error: null},
     reducers: {},
@@ -46,7 +46,12 @@ const MemberSlice = createSlice({
                 state.error = action.payload
             })
             //getProfileMember
+            .addCase(getProfileMember.pending, (state) => {
+                state.loading = true
+                state.error = null
+            })
             .addCase(getProfileMember.fulfilled, (state, action) => {
+                state.loading = false
                 state.user = action.payload
             })
     }

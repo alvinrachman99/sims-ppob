@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 function Header() {
 
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.member)
+    const { user, loading, error } = useSelector((state) => state.member)
 
     useEffect(()=>{
-        dispatch(getProfileMember())
-    }, [dispatch])
+        if(user.length === 0){
+            dispatch(getProfileMember())
+        }
+    }, [dispatch, user.length])
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -27,7 +29,11 @@ function Header() {
                         <img src={profile_photo} />
                     </div>
                     <span style={{ fontSize: '1.1rem' }}>Selamat datang,</span>
-                    <h3>{`${user.data.first_name} ${user.data.last_name}`}</h3>
+                    {
+                        user.length !== 0 
+                        ? <h3>{`${user.data.first_name} ${user.data.last_name}`}</h3>
+                        : <h3>Kristianto Wibowo</h3>
+                    }
                 </div>
                 <div className="col-md-7">
                     <div className="card text-light" style={{ backgroundColor: 'red' }}>
