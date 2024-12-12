@@ -11,7 +11,7 @@ function Register() {
 
   const navigate = useNavigate(); // Inisialisasi useNavigate
   const dispatch = useDispatch();
-  const {loading, error} = useSelector((state) => state.member)
+  const {loadingMember, errorMember} = useSelector((state) => state.member)
 
   const [register, setRegister] = useState({
     email: "",
@@ -104,7 +104,7 @@ function Register() {
     // Validasi
     if (!validateForm()) return;
     
-    if (loading) return;
+    if (loadingMember) return;
 
     // Buat salinan register tanpa confirm_password
     const { confirm_password, ...dataToSend } = register;
@@ -217,8 +217,8 @@ function Register() {
                     {errors.conf_password && <span style={{ color: 'red', float: 'right', fontSize: '0.8rem' }}>{errors.conf_password}</span>}
                 </div>
                 <div className="mb-4">
-                    <button type="submit" disabled={loading} className="btn btn-danger w-100">{loading ? 'Registrasi...' : 'Registrasi'}</button>
-                    {error && <div>Error: {error}</div>}
+                    <button type="submit" disabled={loadingMember} className="btn btn-danger w-100">{loadingMember ? 'Registrasi...' : 'Registrasi'}</button>
+                    {errorMember && <div>Error: {errorMember}</div>}
                 </div>
                 <div className='text-center'>
                     sudah punya akun? login <Link to="/login" className='disini'>di sini</Link>

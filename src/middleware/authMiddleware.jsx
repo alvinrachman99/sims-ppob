@@ -1,4 +1,4 @@
-const authMiddleware = (store) => (next) => (action) => {
+const AuthMiddleware = (store) => (next) => (action) => {
     // console.log('middleware:')
     // console.log(action)
     // Proses login
@@ -19,5 +19,5 @@ const authMiddleware = (store) => (next) => (action) => {
     return next(action);
 };
 
-export default authMiddleware;
+export default AuthMiddleware;
   

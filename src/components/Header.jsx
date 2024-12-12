@@ -2,19 +2,29 @@ import { useEffect, useState } from 'react';
 import profile_photo from '../assets/website_assets/Profile_Photo.png'
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { getProfileMember } from '../features/MemberSlice';
+import { getBalance } from '../features/TransactionSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { formatNumber } from '../utils/NumberFormatter';
 
 function Header() {
 
     const dispatch = useDispatch();
-    const { user, loading, error } = useSelector((state) => state.member)
+    const getDataProfile = useSelector((state) => state.member)
+    const { dataMember, loadingMember} = getDataProfile
+    const getDataBalance = useSelector((state) => state.transaction)
+    const { dataTransaction, loadingTransaction} = getDataBalance
 
     useEffect(()=>{
-        if(user.length === 0){
+        if(!dataMember && !loadingMember){
             dispatch(getProfileMember())
         }
-    }, [dispatch, user.length])
 
+        if(!dataTransaction && !loadingTransaction){
+            dispatch(getBalance())
+        }
+        
+    }, [dispatch, dataMember, loadingMember, dataTransaction, loadingTransaction])
+    
     const [showPassword, setShowPassword] = useState(false);
 
     const handleTogglePassword = () => {
@@ -30,8 +40,8 @@ function Header() {
                     </div>
                     <span style={{ fontSize: '1.1rem' }}>Selamat datang,</span>
                     {
-                        user.length !== 0 
-                        ? <h3>{`${user.data.first_name} ${user.data.last_name}`}</h3>
+                        dataMember 
+                        ? <h3>{`${dataMember.data.first_name} ${dataMember.data.last_name}`}</h3>
                         : <h3>Kristianto Wibowo</h3>
                     }
                 </div>
@@ -41,7 +51,9 @@ function Header() {
                             <span>Saldo anda</span>
                             <div className='saldo-header'>
                                 <label>Rp</label>
-                                <input type={showPassword ? 'text' : 'password'} className="form-control text-light" value="123456" readOnly />
+                                <input type={showPassword ? 'text' : 'password'} className="form-control text-light" value={
+                                    dataTransaction ? formatNumber(dataTransaction.data.balance) : 0
+                                } readOnly />
                             </div>
                             <small>Lihat Saldo &nbsp;<span className='button-toggle-eye' onClick={handleTogglePassword}>{
                                 showPassword ? <FaRegEyeSlash /> : <FaRegEye />

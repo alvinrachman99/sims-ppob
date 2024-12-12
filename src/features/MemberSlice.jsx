@@ -26,33 +26,33 @@ export const getProfileMember = createAsyncThunk(
 const MemberSlice = createSlice({
     name: 'member',
     initialState: {
-        user:[], 
-        loading: false,
-        error: null},
+        dataMember:null, 
+        loadingMember: false,
+        errorMember: null},
     reducers: {},
     extraReducers: (builder) => {
         builder
             // register
             .addCase(registerMember.pending, (state) => {
-                state.loading = true
-                state.error = null
+                state.loadingMember = true
+                state.errorMember = null
             })
             .addCase(registerMember.fulfilled, (state, action) => {
-                state.loading = false
-                state.user = action.payload; // Menyimpan data user dari response
+                state.loadingMember = false
+                state.dataMember = action.payload; // Menyimpan data Member dari response
             })
             .addCase(registerMember.rejected, (state, action) => {
-                state.loading = false
-                state.error = action.payload
+                state.loadingMember = false
+                state.errorMember = action.payload
             })
             //getProfileMember
             .addCase(getProfileMember.pending, (state) => {
-                state.loading = true
-                state.error = null
+                state.loadingMember = true
+                state.errorMember = null
             })
             .addCase(getProfileMember.fulfilled, (state, action) => {
-                state.loading = false
-                state.user = action.payload
+                state.loadingMember = false
+                state.dataMember = action.payload
             })
     }
 })

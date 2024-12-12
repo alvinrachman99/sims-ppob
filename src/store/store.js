@@ -1,14 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit"
-import memberSlice from '../features/MemberSlice'
-import authSlice from "../features/AuthSlice"
-import authMiddleware from "../middleware/AuthMiddleware"
+import MemberSlice from '../features/MemberSlice'
+import AuthSlice from "../features/AuthSlice"
+import TransactionSlice from "../features/TransactionSlice"
+import InformationSlice from "../features/InformationSlice"
+import AuthMiddleware from "../middleware/AuthMiddleware"
 
 export const store = configureStore({
     reducer: {
-        member: memberSlice,
-        auth: authSlice,
+        member: MemberSlice,
+        auth: AuthSlice,
+        transaction: TransactionSlice,
+        information: InformationSlice,
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware()
-            .concat(authMiddleware),
+            .concat(AuthMiddleware),
 })

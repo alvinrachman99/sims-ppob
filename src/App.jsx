@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log({token})
+    // console.log({token})
     if (token && !validateToken(token)) {
       localStorage.removeItem('token'); // Hapus token yang sudah expired
     }
