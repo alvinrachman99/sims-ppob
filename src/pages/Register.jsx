@@ -4,14 +4,14 @@ import { MdOutlineAlternateEmail, MdOutlineLock } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useState } from 'react';
-import { registerMembership } from '../features/membershipSlice';
+import { registerMember } from '../features/MemberSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
 
   const navigate = useNavigate(); // Inisialisasi useNavigate
   const dispatch = useDispatch();
-  const {loading, error} = useSelector((state) => state.membership)
+  const {loading, error} = useSelector((state) => state.member)
 
   const [register, setRegister] = useState({
     email: "",
@@ -110,11 +110,11 @@ function Register() {
     const { confirm_password, ...dataToSend } = register;
 
     try {
-      const result = await dispatch(registerMembership(dataToSend)).unwrap();
+      const result = await dispatch(registerMember(dataToSend)).unwrap();
       // console.log('result:')
       // console.log(result)
       if(result.status === 0){
-        navigate('/'); // Navigasi jika sukses
+        navigate('/login'); // Navigasi jika sukses
       } else {
         if(result.status == 102){ // validasi email sudah terdaftar
           setErrors(prevErrors => ({
@@ -221,7 +221,7 @@ function Register() {
                     {error && <div>Error: {error}</div>}
                 </div>
                 <div className='text-center'>
-                    sudah punya akun? login <Link to="/" className='disini'>di sini</Link>
+                    sudah punya akun? login <Link to="/login" className='disini'>di sini</Link>
                 </div>
             </form>
           </div>

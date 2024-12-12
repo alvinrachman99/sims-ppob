@@ -14,3 +14,29 @@
 .disini:hover {
   text-decoration: underline;
 }
+
+.saldo-header {
+  position: relative;
+}
+
+.saldo-header input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  pointer-events: none;
+  padding: 0;
+  padding-left: 2.2rem;
+  font-size: 2.5rem;
+}
+
+.saldo-header label {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.button-toggle-eye {
+  cursor: pointer;
+}

@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../axios/axiosInstance";
+import axiosInstance from "../axios/AxiosInstance";
 
-export const registerMembership = createAsyncThunk(
-    'membership/registerMembership',
+export const registerMember = createAsyncThunk(
+    'member/registerMember',
     async (registerData) => {
         try {
             console.log('Registering user with data:', registerData);  // Debug data yang dikirim
@@ -15,16 +15,16 @@ export const registerMembership = createAsyncThunk(
     }
 )
 
-export const getMembership = createAsyncThunk(
-    'membership/getMembership',
+export const getProfileMember = createAsyncThunk(
+    'member/getProfileMember',
     async () => {
         const response = await axiosInstance.get('/profile')
         return response.data
     }
 )
 
-const membershipSlice = createSlice({
-    name: 'membership',
+const MemberSlice = createSlice({
+    name: 'member',
     initialState: {
         user:null, 
         loading: false,
@@ -33,23 +33,23 @@ const membershipSlice = createSlice({
     extraReducers: (builder) => {
         builder
             // register
-            .addCase(registerMembership.pending, (state) => {
+            .addCase(registerMember.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
-            .addCase(registerMembership.fulfilled, (state, action) => {
+            .addCase(registerMember.fulfilled, (state, action) => {
                 state.loading = false
                 state.user = action.payload; // Menyimpan data user dari response
             })
-            .addCase(registerMembership.rejected, (state, action) => {
+            .addCase(registerMember.rejected, (state, action) => {
                 state.loading = false
                 state.error = action.payload
             })
-            //getMembership
-            .addCase(getMembership.fulfilled, (state, action) => {
+            //getProfileMember
+            .addCase(getProfileMember.fulfilled, (state, action) => {
                 state.user = action.payload
             })
     }
 })
 
-export default membershipSlice.reducer
+export default MemberSlice.reducer

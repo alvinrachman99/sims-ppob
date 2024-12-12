@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import illustrasi_login_picture from '../assets/website_assets/Illustrasi_Login.png'
 import logo from '../assets/website_assets/Logo.png'
 import { MdOutlineAlternateEmail, MdOutlineLock } from "react-icons/md";
-import { Link } from 'react-router-dom';
-import { login } from '../features/authSlice'
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../features/AuthSlice'
 import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
@@ -25,6 +25,7 @@ function Login() {
     password: useRef(null),
   };
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { loading, error } = useSelector((state) => state.auth)
 
@@ -84,7 +85,7 @@ function Login() {
       // console.log('result:')
       // console.log(result)
       if(result.payload.token){
-        navigate('/home'); // Navigasi jika sukses
+        navigate('/'); // Navigasi ke Home jika sukses
       } else {
         setErrLogin(result.payload.message)
       }

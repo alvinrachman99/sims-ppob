@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
-import membershipSlice from "../features/membershipSlice"
-import authSlice from "../features/authSlice"
-import authMiddleware from "../middleware/authMiddleware"
+import memberSlice from '../features/MemberSlice'
+import authSlice from "../features/AuthSlice"
+import authMiddleware from "../middleware/AuthMiddleware"
 
 export const store = configureStore({
     reducer: {
-        membership: membershipSlice,
+        member: memberSlice,
         auth: authSlice,
     },
     middleware: (getDefaultMiddleware) => 
