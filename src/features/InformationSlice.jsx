@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../axios/AxiosInstance";
+import axiosInstance from "../axios/AxiosConfig";
 
 export const getBanner = createAsyncThunk(
     'information/getBanner',
