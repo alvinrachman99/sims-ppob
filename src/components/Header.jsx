@@ -31,12 +31,22 @@ function Header() {
         setShowPassword(!showPassword);
     };
 
+    const isImageExist = () => {
+        const imgUrl = dataMember ? dataMember.data.profile_image : ''
+        const parts = imgUrl?.split('/')
+        const img = parts[parts.length - 1]
+    
+        if(img == null) return false
+    
+        return true
+    }
+
     return (
         <div className="container">
             <div className="row my-4">
                 <div className="col-md-5">
                     <div className="profile-photo mb-3">
-                        <img src={profile_photo} />
+                        <img src={dataMember && isImageExist() ? dataMember.data.profile_image : profile_photo} style={{ borderRadius: '100%' }} />
                     </div>
                     <span style={{ fontSize: '1.1rem' }}>Selamat datang,</span>
                     {
