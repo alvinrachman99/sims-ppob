@@ -5,7 +5,7 @@ import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile, getProfileMember, updateProfileImage } from '../features/MemberSlice';
 import { useEffect, useRef, useState } from 'react';
-import { logout } from '../features/AuthSlice'
+import { logout } from '../features/LoginSlice'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'

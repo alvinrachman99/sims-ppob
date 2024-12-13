@@ -3,7 +3,7 @@ import illustrasi_login_picture from '../assets/website_assets/Illustrasi_Login.
 import logo from '../assets/website_assets/Logo.png'
 import { MdOutlineAlternateEmail, MdOutlineLock } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../features/AuthSlice'
+import { login } from '../features/LoginSlice'
 import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
