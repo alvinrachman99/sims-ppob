@@ -24,7 +24,7 @@ function Services() {
                                 <Link to={`/service/${item.service_code}`}>
                                 <img src={item.service_icon} className="img-fluid" />
                                 </Link>
-                                <div className="fw-lighter" style={{ fontSize:'0.8vw' }}>{item.service_name}</div>
+                                <div className="fw-lighter service-name">{item.service_name}</div>
                             </div>
                         ))
                 }

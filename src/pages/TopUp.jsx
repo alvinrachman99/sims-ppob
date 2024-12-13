@@ -125,7 +125,7 @@ function TopUp() {
                 <span style={{ fontSize: '1.1rem' }}>Silakan masukan</span>
                 <h3>Nominal Top Up</h3>
                 <div className="row mt-5">
-                    <div className="col-md-7">
+                    <div className="col-md-7 mb-4">
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4 position-relative">
                                 <CiCreditCard1 
@@ -144,26 +144,24 @@ function TopUp() {
                             <button type="submit" className={`btn ${nominal ? 'btn-danger' : 'btn-secondary'} w-100`} disabled={!nominal}>Top Up</button>
                         </form>
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-5 mb-4">
                         <div className="row g-1">
-                            <div className="col-md-4">
+                            <div className="col-md-4 col-4 my-2">
                                 <button type='button' className='btn btn-outline-secondary w-100' onClick={() => handleButtonNominal(10000)}>Rp. 10.000</button>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-4 col-4 my-2">
                                 <button type='button' className='btn btn-outline-secondary w-100' onClick={() => handleButtonNominal(20000)}>Rp. 20.000</button>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-4 col-4 my-2">
                                 <button type='button' className='btn btn-outline-secondary w-100' onClick={() => handleButtonNominal(50000)}>Rp. 50.000</button>
                             </div>
-                        </div>
-                        <div className="row g-1 mt-3">
-                            <div className="col-md-4">
+                            <div className="col-md-4 col-4 my-2">
                                 <button type='button' className='btn btn-outline-secondary w-100' onClick={() => handleButtonNominal(100000)}>Rp. 100.000</button>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-4 col-4 my-2">
                                 <button type='button' className='btn btn-outline-secondary w-100' onClick={() => handleButtonNominal(250000)}>Rp. 250.000</button>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-4 col-4 my-2">
                                 <button type='button' className='btn btn-outline-secondary w-100' onClick={() => handleButtonNominal(500000)}>Rp. 500.000</button>
                             </div>
                         </div>
