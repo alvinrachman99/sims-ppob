@@ -36,17 +36,27 @@ function Header() {
         const parts = imgUrl?.split('/')
         const img = parts[parts.length - 1]
     
-        if(img == null) return false
+        if(img == 'null') {
+            return false
+        } else {
+            return true
+        }
     
-        return true
     }
+    // console.log(isImageExist())
+    // console.log(dataMember)
 
     return (
         <div className="container">
             <div className="row my-4">
                 <div className="col-md-5">
                     <div className="profile-photo mb-3">
-                        <img src={dataMember && isImageExist() ? dataMember.data.profile_image : profile_photo} style={{ borderRadius: '100%' }} />
+                        <img style={{ borderRadius: '100%' }} src={
+                            dataMember && isImageExist()
+                            ? dataMember.data.profile_image  
+                            : profile_photo  
+                        } />
+                        
                     </div>
                     <span style={{ fontSize: '1.1rem' }}>Selamat datang,</span>
                     {

@@ -4,7 +4,7 @@ import { validateToken } from '../utils/ValidateToken';
 
 const ProtectedRoute = () => {
   const token = localStorage.getItem('token');
-  console.log({token})
+  // console.log({token})
 
   const isTokenValid = validateToken(token)
   

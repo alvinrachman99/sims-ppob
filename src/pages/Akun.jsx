@@ -178,7 +178,7 @@ function Akun() {
     const parts = imgUrl?.split('/')
     const img = parts[parts.length - 1]
 
-    if(img == null) return false
+    if(img == 'null') return false
 
     return true
   }
