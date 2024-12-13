@@ -3,17 +3,25 @@ import axiosInstance from "../axios/AxiosConfig";
 
 export const getBalance = createAsyncThunk(
     'transaction/getBalance',
-    async () => {
-        const response = await axiosInstance.get('/balance')
+    async (token) => {
+        const response = await axiosInstance.get('/balance', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         return response.data
     }
 )
 
 export const topUp = createAsyncThunk(
     'transaction/topUp',
-    async (dataTopUp) => {
+    async (token, dataTopUp) => {
         try {
-            const response = await axiosInstance.post('/topup', dataTopUp)
+            const response = await axiosInstance.post('/topup', dataTopUp, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             return response.data
         } catch (error) {
             console.error('failed:', error);
@@ -24,9 +32,13 @@ export const topUp = createAsyncThunk(
 
 export const pembayaran = createAsyncThunk(
     'transaction/pembayaran',
-    async (dataPembayaran) => {
+    async (token, dataPembayaran) => {
         try {
-            const response = await axiosInstance.post('/transaction', dataPembayaran)
+            const response = await axiosInstance.post('/transaction', dataPembayaran, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             return response.data
         } catch (error) {
             console.error('failed:', error);
@@ -37,8 +49,12 @@ export const pembayaran = createAsyncThunk(
 
 export const getTransaction = createAsyncThunk(
     'transaction/getTransaction',
-    async () => {
-        const response = await axiosInstance.get('/transaction/history')
+    async (token) => {
+        const response = await axiosInstance.get('/transaction/history', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         return response.data
     }
 )
@@ -66,7 +82,7 @@ export const TransactionSlice = createSlice({
             })
             .addCase(getBalance.fulfilled, (state, action) => {
                 state.loadingBalance = false
-                state.dataBalance = action.payload
+                state.dataBalance = action.payload.data
             })
 
             //topUp

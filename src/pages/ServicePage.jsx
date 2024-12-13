@@ -12,6 +12,8 @@ import withReactContent from 'sweetalert2-react-content'
 import logo from '../assets/website_assets/Logo.png'
 
 function ServicePage() {
+    const token = localStorage.getItem('token')
+
     const code = useParams().code
     const [nominal, setNominal] = useState(0)
     const MySwal = withReactContent(Swal);
@@ -20,7 +22,7 @@ function ServicePage() {
     const dispatch = useDispatch()
     const { dataServices, loadingServices } = useSelector((state) => state.information)
     const { dataBalance } = useSelector((state) => state.transaction);
-    const balance = dataBalance?.data?.balance
+    const balance = dataBalance?.balance
 
     useEffect(()=>{
         if(code && !dataServices && !loadingServices){
@@ -73,10 +75,10 @@ function ServicePage() {
 
         if(modalConfirm.isConfirmed){
             try {
-                const result = await dispatch(pembayaran({service_code: code})).unwrap();
+                const result = await dispatch(pembayaran(token, {service_code: code})).unwrap();
                 
                 if(result.status === 0){
-                    dispatch(getBalance())
+                    dispatch(getBalance(token))
 
                     const result = await MySwal.fire({
                         title: 'Pembayaran Berhasil',

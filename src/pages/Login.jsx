@@ -82,9 +82,9 @@ function Login() {
 
     try {
       const result = await dispatch(login(loginUser));
-      // console.log('result:')
-      // console.log(result)
+      // console.log('result:', result)
       if(result.payload.token){
+        await localStorage.setItem('token', result.payload.token);
         navigate('/'); // Navigasi ke Home jika sukses
       } else {
         setErrLogin(result.payload.message)

@@ -7,6 +7,8 @@ import { formatNumber } from '../utils/NumberFormatter'
 import { formatingDate } from '../utils/DateFormatter'
 
 function Transaction() {
+  const token = localStorage.getItem('token');
+
   const dispatch = useDispatch()
   const { dataTransaction, loadingTransaction } = useSelector((state) => state.transaction)
 
@@ -15,10 +17,10 @@ function Transaction() {
   const [showData, setShowData] = useState([]) 
 
   useEffect(() => {
-    if (!loadingTransaction && !dataTransaction) {
-      dispatch(getTransaction())
+    if(token){
+      dispatch(getTransaction(token))
     }
-  }, [dispatch, loadingTransaction, dataTransaction])
+  }, [dispatch, token])
 
   useEffect(() => {
     if (dataTransaction && !loadingTransaction) {

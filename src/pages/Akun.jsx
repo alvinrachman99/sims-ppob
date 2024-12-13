@@ -11,6 +11,8 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 function Akun() {
+  const token = localStorage.getItem('token')
+  
   const MySwal = withReactContent(Swal);
   const { loadingTopUp } = useSelector((state) => state.transaction)
   const navigate = useNavigate()
@@ -20,7 +22,7 @@ function Akun() {
 
   useEffect(() => {
     if (!dataMember && !loadingMember) {
-      dispatch(getProfileMember());
+      dispatch(getProfileMember(token));
     }
   }, [dispatch, dataMember, loadingMember]);
 
@@ -43,9 +45,9 @@ function Akun() {
   useEffect(() => {
     if (dataMember && !loadingMember) {
       setProfile({
-        email: dataMember.data.email,
-        first_name: dataMember.data.first_name,
-        last_name: dataMember.data.last_name,
+        email: dataMember.email,
+        first_name: dataMember.first_name,
+        last_name: dataMember.last_name,
       });
     }
   }, [dataMember, loadingMember]);
@@ -112,8 +114,8 @@ function Akun() {
     if (loadingMember) return;
 
     try {
-      await dispatch(updateProfile(profile)).unwrap();
-      await dispatch(getProfileMember());
+      await dispatch(updateProfile(token, profile)).unwrap();
+      await dispatch(getProfileMember(token));
       await setForm(0); // set form jadi 0 == edit
 
       await MySwal.fire({
@@ -152,9 +154,9 @@ function Akun() {
     }
 
     try {
-      await dispatch(updateProfileImage(file));
+      await dispatch(updateProfileImage({token, file}));
   
-      await dispatch(getProfileMember())
+      await dispatch(getProfileMember(token))
 
       await MySwal.fire({
         title: "Berhasil!",
@@ -168,13 +170,14 @@ function Akun() {
 
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await dispatch(logout());
+    localStorage.removeItem('token');
     navigate('/login') //logout
   };
 
   const isImageExist = () => {
-    const imgUrl = dataMember ? dataMember.data.profile_image : ''
+    const imgUrl = dataMember ? dataMember.profile_image : ''
     const parts = imgUrl?.split('/')
     const img = parts[parts.length - 1]
 
@@ -196,7 +199,7 @@ function Akun() {
               >
                 <FaPencilAlt />
               </div>
-              <img src={dataMember && isImageExist() ? dataMember.data.profile_image : profile_photo} alt="Profile" className='img-fluid' style={{ 
+              <img src={dataMember && isImageExist() ? dataMember.profile_image : profile_photo} alt="Profile" className='img-fluid' style={{ 
                 width: '15%',
                 height: '15%',
                 borderRadius: '100%',
@@ -207,7 +210,7 @@ function Akun() {
 
         <div className="row">
           <div className="col">
-            <h2>{`${dataMember ? dataMember.data.first_name : ''} ${dataMember ? dataMember.data.last_name : ''}`}</h2>
+            <h2>{`${dataMember ? dataMember.first_name : ''} ${dataMember ? dataMember.last_name : ''}`}</h2>
           </div>
         </div>
 

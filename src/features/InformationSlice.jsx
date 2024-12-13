@@ -1,10 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../axios/AxiosConfig";
 
+const token = localStorage.getItem('token')
+
 export const getBanner = createAsyncThunk(
     'information/getBanner',
     async () => {
-        const response = await axiosInstance.get('/banner')
+        const response = await axiosInstance.get('/banner', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         return response.data
     }
 )
@@ -12,7 +18,11 @@ export const getBanner = createAsyncThunk(
 export const getServices = createAsyncThunk(
     'information/getServices',
     async () => {
-        const response = await axiosInstance.get('/services')
+        const response = await axiosInstance.get('/services', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         return response.data
     }
 )

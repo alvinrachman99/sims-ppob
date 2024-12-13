@@ -6,21 +6,12 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import ProtectedRoute from './components/ProtectedRoute';
-import { validateToken } from './utils/ValidateToken';
-import { useEffect } from 'react';
 import TopUp from './pages/TopUp';
 import Transaction from './pages/Transaction';
 import Akun from './pages/Akun';
 import ServicePage from './pages/ServicePage';
 
 function App() {
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    // console.log({token})
-    if (token && !validateToken(token)) {
-      localStorage.removeItem('token'); // Hapus token yang sudah expired
-    }
-  }, []);
 
   return (
     <BrowserRouter>

@@ -6,12 +6,11 @@ export const login = createAsyncThunk(
   async (credentials) => {
     try {
       const response = await axiosInstance.post('/login', credentials);
-      // console.log('response:')
-      // console.log(response)
+      // console.log('response login thunk:', response)
       const { token } = response.data.data;
       return { token };
     } catch (error) {
-      // console.error('error slice:', error)
+      console.error('error slice:', error)
       return error.response.data;
     }
   }

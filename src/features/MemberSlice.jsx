@@ -16,17 +16,25 @@ export const registerMember = createAsyncThunk(
 
 export const getProfileMember = createAsyncThunk(
     'member/getProfileMember',
-    async () => {
-        const response = await axiosInstance.get('/profile')
+    async (token) => {
+        const response = await axiosInstance.get('/profile', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         return response.data
     }
 )
 
 export const updateProfile = createAsyncThunk(
     'member/updateProfile',
-    async (dataProfile) => {
+    async (token, dataProfile) => {
         try {
-            const response = axiosInstance.put('/profile/update', dataProfile)
+            const response = axiosInstance.put('/profile/update', dataProfile, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             return response.data
         } catch (error) {
             return error.response            
@@ -36,19 +44,19 @@ export const updateProfile = createAsyncThunk(
 
 export const updateProfileImage = createAsyncThunk(
     'member/updateProfileImage',
-    async (file, { rejectWithValue }) => {
+    async ({token, file}) => {
         const formData = new FormData();
-        formData.append('file', file); // Menambahkan file ke dalam FormData
-    
+        formData.append('file', file); 
+        
         try {
           const response = await axiosInstance.put('/profile/image', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data', // Diperlukan untuk file upload
+                Authorization: `Bearer ${token}`,
             },
           });
           return response.data;
         } catch (error) {
-          return rejectWithValue(error.response.data);
+          return error;
         }
     }
 )
@@ -83,7 +91,7 @@ const MemberSlice = createSlice({
             })
             .addCase(getProfileMember.fulfilled, (state, action) => {
                 state.loadingMember = false
-                state.dataMember = action.payload
+                state.dataMember = action.payload.data
             })
 
             //updateProfile
