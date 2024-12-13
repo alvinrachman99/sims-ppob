@@ -1,6 +1,6 @@
 const AuthMiddleware = (store) => (next) => (action) => {
-    // console.log('middleware:')
-    // console.log(action)
+    console.log('middleware:')
+    console.log(action)
     // Proses login
     if (action.type === 'auth/login/fulfilled') {
         // Menyimpan token di localStorage setelah login berhasil

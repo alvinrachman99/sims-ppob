@@ -28,13 +28,13 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
 
-        {/* <Route element={<PrivateRoute />}> */}
+        <Route element={<PrivateRoute />}>
           <Route path='/' element={<Home />} />
           <Route path='/topup' element={<TopUp />} />
           <Route path='/transaction' element={<Transaction />} />
-          <Route path='/akun' element={<TopUp />} />
+          <Route path='/akun' element={<Akun />} />
           <Route path='/service/:code' element={<ServicePage />} />
-        {/* </Route> */}
+        </Route>
       
       </Routes>
     </BrowserRouter>

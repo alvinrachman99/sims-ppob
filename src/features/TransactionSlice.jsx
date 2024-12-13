@@ -35,6 +35,14 @@ export const pembayaran = createAsyncThunk(
     }
 )
 
+export const getTransaction = createAsyncThunk(
+    'transaction/getTransaction',
+    async () => {
+        const response = await axiosInstance.get('/transaction/history')
+        return response.data
+    }
+)
+
 export const TransactionSlice = createSlice({
     name: 'transaction',
     initialState: {
@@ -44,7 +52,9 @@ export const TransactionSlice = createSlice({
         topUpAmount: null,
         loadingTopUp: false,
         pembayaran: null,
-        loadingPembayaran: false
+        loadingPembayaran: false,
+        dataTransaction: null,
+        loadingTransaction: false,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -75,6 +85,15 @@ export const TransactionSlice = createSlice({
             .addCase(pembayaran.fulfilled, (state, action) => {
                 state.loadingPembayaran = false
                 state.pembayaran = action.payload;
+            })
+
+            //getTransaction
+            .addCase(getTransaction.pending, (state) => {
+                state.loadingTransaction = true
+            })
+            .addCase(getTransaction.fulfilled, (state, action) => {
+                state.loadingTransaction = false
+                state.dataTransaction = action.payload
             })
     }
 })

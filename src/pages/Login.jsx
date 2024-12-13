@@ -49,7 +49,7 @@ function Login() {
       isValid = false;
     }
 
-    setErrors(formErrors);  // Set errors to state
+    setErrors(formErrors);  
 
     // Autofokus pada kolom pertama yang memiliki error
     if (!isValid) {

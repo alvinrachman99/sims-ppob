@@ -22,12 +22,44 @@ export const getProfileMember = createAsyncThunk(
     }
 )
 
+export const updateProfile = createAsyncThunk(
+    'member/updateProfile',
+    async (dataProfile) => {
+        try {
+            const response = axiosInstance.put('/profile/update', dataProfile)
+            return response.data
+        } catch (error) {
+            return error.response            
+        }
+    }
+)
+
+export const updateProfileImage = createAsyncThunk(
+    'member/updateProfileImage',
+    async (file, { rejectWithValue }) => {
+        const formData = new FormData();
+        formData.append('file', file); // Menambahkan file ke dalam FormData
+    
+        try {
+          const response = await axiosInstance.put('/profile/image', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data', // Diperlukan untuk file upload
+            },
+          });
+          return response.data;
+        } catch (error) {
+          return rejectWithValue(error.response.data);
+        }
+    }
+)
+
 const MemberSlice = createSlice({
     name: 'member',
     initialState: {
         dataMember:null, 
         loadingMember: false,
-        errorMember: null},
+        errorMember: null,
+    },
     reducers: {},
     extraReducers: (builder) => {
         builder
@@ -52,6 +84,22 @@ const MemberSlice = createSlice({
             .addCase(getProfileMember.fulfilled, (state, action) => {
                 state.loadingMember = false
                 state.dataMember = action.payload
+            })
+
+            //updateProfile
+            .addCase(updateProfile.pending, (state) => {
+                state.loadingMember = true
+            })
+            .addCase(updateProfile.fulfilled, (state) => {
+                state.loadingMember = false
+            })
+
+            //updateProfileImage
+            .addCase(updateProfileImage.pending, (state) => {
+                state.loadingMember = true
+            })
+            .addCase(updateProfileImage.fulfilled, (state) => {
+                state.loadingMember = false
             })
     }
 })
