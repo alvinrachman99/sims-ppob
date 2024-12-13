@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
-import PrivateRoute from './components/privateRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 import { validateToken } from './utils/ValidateToken';
 import { useEffect } from 'react';
 import TopUp from './pages/TopUp';
@@ -28,7 +28,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
 
-        <Route element={<PrivateRoute />}>
+        <Route element={<ProtectedRoute />}>
           <Route path='/' element={<Home />} />
           <Route path='/topup' element={<TopUp />} />
           <Route path='/transaction' element={<Transaction />} />

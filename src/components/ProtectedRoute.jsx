@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { validateToken } from '../utils/ValidateToken';
 
-const PrivateRoute = () => {
+const ProtectedRoute = () => {
   const token = localStorage.getItem('token');
   console.log({token})
 
@@ -20,4 +20,4 @@ const PrivateRoute = () => {
   return <Outlet />;
 };
 
-export default PrivateRoute;
+export default ProtectedRoute;
