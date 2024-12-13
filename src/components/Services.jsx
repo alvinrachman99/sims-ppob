@@ -5,14 +5,15 @@ import { Link } from "react-router-dom"
 
 function Services() {
 
+    const token = localStorage.getItem('token');
     const dispatch = useDispatch()
-    const { dataServices, loadingServices } = useSelector((state) => state.information)
+    const { dataServices } = useSelector((state) => state.information)
     
     useEffect(()=>{
-        if(!dataServices && !loadingServices){
-            dispatch(getServices())
+        if(token){
+            dispatch(getServices(token))
         }
-    }, [dispatch, dataServices, loadingServices])
+    }, [dispatch, token])
     
     return (
         <div className="container">

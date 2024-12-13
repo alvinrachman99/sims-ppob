@@ -4,17 +4,18 @@ import { useEffect, useRef, useState } from "react"
 
 function Banner() {
 
+  const token = localStorage.getItem('token');
+  const dispatch = useDispatch()
+  const { dataBanner } = useSelector((state) => state.information)
+  
   const [activeIndex, setActiveIndex] = useState(0);
   const tombolNextCarousel = useRef(null)
-
-  const dispatch = useDispatch()
-  const { dataBanner, loadingBanner } = useSelector((state) => state.information)
   
   useEffect(()=>{
-      if(!dataBanner && !loadingBanner){
-          dispatch(getBanner())
+      if(token){
+        dispatch(getBanner(token))
       }
-  }, [dispatch, dataBanner, loadingBanner])
+  }, [dispatch, token])
 
   const getItemsPerSlide = () => {
     const width = window.innerWidth;

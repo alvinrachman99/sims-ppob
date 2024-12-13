@@ -25,10 +25,10 @@ function ServicePage() {
     const balance = dataBalance?.balance
 
     useEffect(()=>{
-        if(code && !dataServices && !loadingServices){
-            dispatch(getServices())
+        if(code && token){
+            dispatch(getServices(token))
         }
-    }, [dispatch, code, dataServices, loadingServices])
+    }, [dispatch, code, token])
     
     const dataByCode = dataServices?.data?.find((item) => item.service_code === code);
 
