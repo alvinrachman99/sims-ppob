@@ -147,9 +147,9 @@ function Login() {
           </div>
           <div className="w-50" style={{ position: 'absolute', bottom : '5%', padding: '0 5%' }}>
             {errLogin && 
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <div className="alert alert-danger alert-dismissible fade show" role="alert">
                 {errLogin}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             }
           </div>

@@ -12,18 +12,18 @@ function Header() {
     const getDataProfile = useSelector((state) => state.member)
     const { dataMember, loadingMember} = getDataProfile
     const getDataBalance = useSelector((state) => state.transaction)
-    const { dataTransaction, loadingTransaction} = getDataBalance
+    const { dataBalance, loadingBalance} = getDataBalance
 
     useEffect(()=>{
         if(!dataMember && !loadingMember){
             dispatch(getProfileMember())
         }
 
-        if(!dataTransaction && !loadingTransaction){
+        if(!dataBalance && !loadingBalance){
             dispatch(getBalance())
         }
         
-    }, [dispatch, dataMember, loadingMember, dataTransaction, loadingTransaction])
+    }, [dispatch, dataMember, loadingMember, dataBalance, loadingBalance])
     
     const [showPassword, setShowPassword] = useState(false);
 
@@ -52,7 +52,7 @@ function Header() {
                             <div className='saldo-header'>
                                 <label>Rp</label>
                                 <input type={showPassword ? 'text' : 'password'} className="form-control text-light" value={
-                                    dataTransaction ? formatNumber(dataTransaction.data.balance) : 0
+                                    dataBalance ? formatNumber(dataBalance.data.balance) : 0
                                 } readOnly />
                             </div>
                             <small>Lihat Saldo &nbsp;<span className='button-toggle-eye' onClick={handleTogglePassword}>{

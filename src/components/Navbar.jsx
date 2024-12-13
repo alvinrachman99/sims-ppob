@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/website_assets/Logo.png'
 
 const Header = () => {
@@ -25,23 +25,37 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           
-          {/* Navigation Links */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item mx-3">
-                <Link className="nav-link" to="/topup">
+                <NavLink className="nav-link" to="/topup" style={
+                  ({isActive}) => ({
+                    color: isActive ? 'red' : '',
+                    fontWeight: 600,
+                  })
+                }>
                   Top Up
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item mx-3">
-                <Link className="nav-link" to="/transaction">
+                <NavLink className="nav-link" to="/transaction" style={
+                  ({isActive}) => ({
+                    color: isActive ? 'red' : '',
+                    fontWeight: 600,
+                  })
+                }>
                   Transaction
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item mx-3">
-                <Link className="nav-link" to="/akun">
+                <NavLink className="nav-link" to="/akun" style={
+                  ({isActive}) => ({
+                    color: isActive ? 'red' : '',
+                    fontWeight: 600,
+                  })
+                }>
                   Akun
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>

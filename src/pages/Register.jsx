@@ -124,10 +124,10 @@ function Register() {
 
           inputRefs['email'].current.focus();
         }
-        console.error('Error:', result.message); // Tangani error
+        console.error('Error:', result.message);
       }
     } catch (error) {
-      console.error('Error:', error); // Tangani error
+      console.error('Error:', error);
     }
   }
 

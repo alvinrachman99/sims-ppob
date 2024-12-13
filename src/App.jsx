@@ -8,6 +8,10 @@ import Home from './pages/Home';
 import PrivateRoute from './components/privateRoute';
 import { validateToken } from './utils/ValidateToken';
 import { useEffect } from 'react';
+import TopUp from './pages/TopUp';
+import Transaction from './pages/Transaction';
+import Akun from './pages/Akun';
+import ServicePage from './pages/ServicePage';
 
 function App() {
   useEffect(() => {
@@ -26,6 +30,10 @@ function App() {
 
         {/* <Route element={<PrivateRoute />}> */}
           <Route path='/' element={<Home />} />
+          <Route path='/topup' element={<TopUp />} />
+          <Route path='/transaction' element={<Transaction />} />
+          <Route path='/akun' element={<TopUp />} />
+          <Route path='/service/:code' element={<ServicePage />} />
         {/* </Route> */}
       
       </Routes>

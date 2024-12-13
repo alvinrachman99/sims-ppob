@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../axios/AxiosInstance";
 
 export const getBanner = createAsyncThunk(
-    'transaction/getBanner',
+    'information/getBanner',
     async () => {
         const response = await axiosInstance.get('/banner')
         return response.data
@@ -10,7 +10,7 @@ export const getBanner = createAsyncThunk(
 )
 
 export const getServices = createAsyncThunk(
-    'transaction/getServices',
+    'information/getServices',
     async () => {
         const response = await axiosInstance.get('/services')
         return response.data

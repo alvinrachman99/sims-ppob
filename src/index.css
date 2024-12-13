@@ -40,3 +40,47 @@
 .button-toggle-eye {
   cursor: pointer;
 }
+
+/* Custom modal sweetalert */
+.custom-modal-size {
+  width: 500px!important;
+  max-width: 90%!important; 
+  padding: 20px!important;
+  border-radius: 8px!important;
+}
+
+.swal2-title {
+  font-size: 24px!important; 
+  margin-bottom: 15px;
+}
+
+.custom-modal-actions {
+  display: flex;
+  flex-direction: column; 
+  gap: 10px; 
+  align-items: center;
+}
+
+.custom-confirm-button {
+  background-color: white!important;
+  color: red!important;
+  border: none!important;
+  box-shadow: none!important;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.custom-confirm-button:hover {
+  background-color: red!important; 
+  color: white!important;
+}
+
+.custom-cancel-button {
+  background-color: white!important;
+  color: gray!important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}

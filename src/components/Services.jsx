@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getServices } from "../features/InformationSlice"
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
 
 function Services() {
 
@@ -20,7 +21,9 @@ function Services() {
                     dataServices &&
                         dataServices.data.map((item, i)=>(
                             <div className="col-2 col-md-1 col-sm-2 text-center" key={i}>
+                                <Link to={`/service/${item.service_code}`}>
                                 <img src={item.service_icon} className="img-fluid" />
+                                </Link>
                                 <div className="fw-lighter" style={{ fontSize:'0.8vw' }}>{item.service_name}</div>
                             </div>
                         ))

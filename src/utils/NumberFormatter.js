@@ -5,3 +5,9 @@ export const formatNumber = (number) => {
         maximumFractionDigits: 2,
     }).format(number);
 };
+
+export const formatInputNumber = (number) => {
+    if (!number) return '';
+
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

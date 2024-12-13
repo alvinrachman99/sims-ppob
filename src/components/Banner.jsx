@@ -19,10 +19,10 @@ function Banner() {
   const getItemsPerSlide = () => {
     const width = window.innerWidth;
 
-    if (width >= 1200) return 4; // Desktop (lebih dari 1200px): 4 item per slide
-    if (width >= 768) return 3;  // Tablet (lebih dari 768px): 3 item per slide
-    if (width >= 576) return 2;  // Tablet kecil: 2 item per slide
-    return 1;  // Mobile: 1 item per slide
+    if (width >= 1200) return 4; 
+    if (width >= 768) return 3;  
+    if (width >= 576) return 2;  
+    return 1;
   };
 
   const [itemsPerSlide, setItemsPerSlide] = useState(getItemsPerSlide());

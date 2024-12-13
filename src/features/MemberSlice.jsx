@@ -5,11 +5,10 @@ export const registerMember = createAsyncThunk(
     'member/registerMember',
     async (registerData) => {
         try {
-            console.log('Registering user with data:', registerData);  // Debug data yang dikirim
             const response = await axiosInstance.post('/registration', registerData)
             return response.data
         } catch (error) {
-            console.error('Registration failed:', error); // Debug error
+            console.error('Registration failed:', error);
             return error.response.data
         }
     }
@@ -39,7 +38,7 @@ const MemberSlice = createSlice({
             })
             .addCase(registerMember.fulfilled, (state, action) => {
                 state.loadingMember = false
-                state.dataMember = action.payload; // Menyimpan data Member dari response
+                state.dataMember = action.payload;
             })
             .addCase(registerMember.rejected, (state, action) => {
                 state.loadingMember = false
