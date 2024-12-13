@@ -35,7 +35,7 @@ function Transaction() {
     setLimit(nextLimit) 
   }
 
-  console.log(showData)
+  // console.log('showData:', showData)
 
   return (
     <>

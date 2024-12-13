@@ -1,3 +1,18 @@
+.icon-update-profile-image {
+  position: absolute;
+  bottom: 3%;
+  right: 43%;
+  margin-left: 1rem;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  width: 30px;
+  height: 30px;
+  background: white;
+  cursor: pointer;
+}
+
 .custom-input-error {
   border : 1px solid red!important;
 }
@@ -83,4 +98,12 @@
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .icon-update-profile-image {
+    font-size: 0.4rem;
+    width: 20px;
+    height: 20px;
+  }
 }

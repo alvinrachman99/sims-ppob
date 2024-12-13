@@ -7,8 +7,12 @@ import { updateProfile, getProfileMember, updateProfileImage } from '../features
 import { useEffect, useRef, useState } from 'react';
 import { logout } from '../features/AuthSlice'
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function Akun() {
+  const MySwal = withReactContent(Swal);
+  const { loadingTopUp } = useSelector((state) => state.transaction)
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { dataMember, loadingMember } = useSelector((state) => state.member);
@@ -45,8 +49,6 @@ function Akun() {
       });
     }
   }, [dataMember, loadingMember]);
-
-  console.log(dataMember)
 
   const validateForm = () => {
     let formErrors = {};
@@ -111,8 +113,15 @@ function Akun() {
 
     try {
       await dispatch(updateProfile(profile)).unwrap();
-      dispatch(getProfileMember());
-      setForm(0); // set form jadi 0 == edit
+      await dispatch(getProfileMember());
+      await setForm(0); // set form jadi 0 == edit
+
+      await MySwal.fire({
+        title: "Berhasil!",
+        text: "Data telah berhasil disimpan.",
+        icon: "success"
+      });
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -123,10 +132,9 @@ function Akun() {
     inputFile.current.click();
   };
 
-  const handleUpdateImage = (e) => {
+  const handleUpdateImage = async (e) => {
     const file = e.target.files[0];
-    // console.log('file:')
-    // console.log(file)
+    // console.log('file:', file)
     if (!file) return;
 
     // Validasi ukuran file (maksimum 100KB)
@@ -143,9 +151,21 @@ function Akun() {
       return;
     }
 
-    dispatch(updateProfileImage(file));
+    try {
+      await dispatch(updateProfileImage(file));
+  
+      await dispatch(getProfileMember())
 
-    dispatch(getProfileMember())
+      await MySwal.fire({
+        title: "Berhasil!",
+        text: "Photo Profile telah berhasil diubah.",
+        icon: "success"
+      });
+      
+    } catch (error) {
+      console.log(error)
+    }
+
   };
 
   const handleLogout = () => {
@@ -153,14 +173,14 @@ function Akun() {
     navigate('/login') //logout
   };
 
-  const cekProfileImage = () => {
+  const isImageExist = () => {
     const imgUrl = dataMember ? dataMember.data.profile_image : ''
     const parts = imgUrl?.split('/')
     const img = parts[parts.length - 1]
 
-    if(img == null) return true
+    if(img == null) return false
 
-    return false
+    return true
   }
 
   return (
@@ -171,25 +191,12 @@ function Akun() {
           <div className="col my-4">
             <div className="position-relative">
               <div
-                style={{
-                  position: 'absolute',
-                  bottom: '3%',
-                  right: '43%',
-                  marginLeft: '1rem',
-                  fontSize: '0.7rem',
-                  padding: '5px',
-                  border: '1px solid grey',
-                  borderRadius: '100%',
-                  width: '30px',
-                  height: '30px',
-                  background: 'white',
-                  cursor: 'pointer',
-                }}
+                className='icon-update-profile-image'
                 onClick={clickInputFile}
               >
                 <FaPencilAlt />
               </div>
-              <img src={dataMember && cekProfileImage() ? dataMember.data.profile_image : profile_photo} alt="Profile" className='img-fluid' style={{ 
+              <img src={dataMember && isImageExist() ? dataMember.data.profile_image : profile_photo} alt="Profile" className='img-fluid' style={{ 
                 width: '15%',
                 height: '15%',
                 borderRadius: '100%',
@@ -200,7 +207,7 @@ function Akun() {
 
         <div className="row">
           <div className="col">
-            <h2>{`${profile.first_name} ${profile.last_name}`}</h2>
+            <h2>{`${dataMember ? dataMember.data.first_name : ''} ${dataMember ? dataMember.data.last_name : ''}`}</h2>
           </div>
         </div>
 
