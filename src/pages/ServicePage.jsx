@@ -75,7 +75,7 @@ function ServicePage() {
 
         if(modalConfirm.isConfirmed){
             try {
-                const result = await dispatch(pembayaran(token, {service_code: code})).unwrap();
+                const result = await dispatch(pembayaran({token, dataPembayaran: {service_code: code}})).unwrap();
                 
                 if(result.status === 0){
                     dispatch(getBalance(token))

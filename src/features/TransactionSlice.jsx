@@ -15,7 +15,7 @@ export const getBalance = createAsyncThunk(
 
 export const topUp = createAsyncThunk(
     'transaction/topUp',
-    async (token, dataTopUp) => {
+    async ({token, dataTopUp}) => {
         try {
             const response = await axiosInstance.post('/topup', dataTopUp, {
                 headers: {
@@ -32,7 +32,7 @@ export const topUp = createAsyncThunk(
 
 export const pembayaran = createAsyncThunk(
     'transaction/pembayaran',
-    async (token, dataPembayaran) => {
+    async ({token, dataPembayaran}) => {
         try {
             const response = await axiosInstance.post('/transaction', dataPembayaran, {
                 headers: {

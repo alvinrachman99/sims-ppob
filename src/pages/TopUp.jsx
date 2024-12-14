@@ -76,8 +76,7 @@ function TopUp() {
 
         if(modalConfirm.isConfirmed){
             try {
-                const result = await dispatch(topUp(token, {top_up_amount: rawNominal})).unwrap();
-                
+                const result = await dispatch(topUp({ token, dataTopUp: { top_up_amount: rawNominal } })).unwrap();
                 if(result.status === 0){
                     dispatch(getBalance(token))
 
