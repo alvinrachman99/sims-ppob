@@ -114,7 +114,7 @@ function Akun() {
     if (loadingMember) return;
 
     try {
-      await dispatch(updateProfile(token, profile)).unwrap();
+      await dispatch(updateProfile({token, profile})).unwrap();
       await dispatch(getProfileMember(token));
       await setForm(0); // set form jadi 0 == edit
 

@@ -28,9 +28,9 @@ export const getProfileMember = createAsyncThunk(
 
 export const updateProfile = createAsyncThunk(
     'member/updateProfile',
-    async (token, dataProfile) => {
+    async ({token, profile}) => {
         try {
-            const response = axiosInstance.put('/profile/update', dataProfile, {
+            const response = axiosInstance.put('/profile/update', profile, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
